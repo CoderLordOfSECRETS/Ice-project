@@ -1,0 +1,135 @@
+:root {
+    --red-munsell: #ec0b43ff;
+    --chocolate-cosmos: #3e000cff;
+    --cadet-gray: #8b939cff;
+}
+
+.bebas-neue-regular {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+body {
+    background-color: var(--cadet-gray);
+    color: var(--cadet-gray);
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: var(--red-munsell);
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: var(--chocolate-cosmos);
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: xx-large;
+}
+
+h2 {
+    color: var(--red-munsell);
+    margin: 20px 0;
+}
+
+p {
+    color: white;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+label {
+    color: white;
+}
+
+button {
+    background-color: var(--red-munsell);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--chocolate-cosmos);
+}
+
+footer {
+    background-color: var(--chocolate-cosmos);
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+.calendar-container {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+    /* Allow the container to grow and fill available space */
+    margin-right: 20px;
+    /* Add margin between containers */
+}
+
+
+/*tabs section*/
+
+.tab-container {
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.tab-button.active {
+    border-bottom: 2px solid blue;
+    font-weight: bold;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/*grid section*/
+.main-container {
+    display: grid;
+    grid-template-columns: 75% 25%;
+}
+
+.box-container {
+    padding: 10px;
+    background-color: lightcoral;
+    /* For visibility */
+}
+
+.confirm-container {
+    margin: auto;
+    text-align: center;
+}
+
+.confirm-button {
+    margin: 5px;
+    width: 95%;
+}

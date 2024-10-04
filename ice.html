@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ice Scheduler</title>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3.5.0/build/global/luxon.js"></script> <!--Not Minified!-->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/luxon3@6.1.15/index.global.min.js"></script>
+  <script src="scripts/scheduler.js"></script>
+  <script src="scripts/FullCallendar.js"></script>
+  <script src="scripts/tabs.js"></script>
+  <link rel="stylesheet" href="ice.css">
+  <link rel="icon" href="Images/calendar.png">
+
+
+  <!--Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <h1>MDHA Ice Scheduling app</h1>
+  <div class="main-container">
+    <div class="box-container">
+      <div class="calendar-container">
+        <div id="calendar"></div>
+      </div>
+    </div>
+    <div class="box-container">
+      <div class="tab-container">
+        <h2>Control Panel</h2>
+        <div class="confirm-container">
+          <button class="confirm-button" onclick="schedule()">Confirm</button>
+        </div>
+        <div class="tabs">
+          <button class="tab-button active" onclick="openTab(event, 'tab1')">Create Ice Slots</button>
+          <button class="tab-button" onclick="openTab(event, 'tab2')">Create Games</button>
+          <button class="tab-button" onclick="openTab(event, 'tab3')">Create Teams</button>
+          <button class="tab-button" onclick="openTab(event, 'tab4')">Create Black Boxes</button>
+        </div>
+
+        <div id="tab1" class="tab-content active">
+          <h2>Input Slots</h2>
+          <label for="slot-input-type">Select Entry Type:</label>
+          <select id="slot-input-type">
+            <option value="Upload">Upload</option>
+            <option value="Manual">Manual</option>
+          </select>
+        </div>
+        <div id="tab2" class="tab-content">
+          <h2>Input Games</h2>
+          <label for="games-input-type">Select Entry Type:</label>
+          <select id="games-input-type">
+            <option value="Upload">Upload</option>
+            <option value="ttmWebLink">TTM Web Link</option>
+            <option value="Manual">Manual</option>
+          </select>
+        </div>
+        <div id="tab3" class="tab-content">
+          <h2>Input Teams</h2>
+          <label for="teams-input-type">Select Entry Type:</label>
+          <select id="teams-input-type">
+            <option value="Upload">Upload</option>
+            <option value="ttmWebLink">TTM Web Link</option>
+            <option value="Manual">Manual</option>
+          </select>
+        </div>
+        <div id="tab4" class="tab-content">
+          <h2>Input Black Boxes</h2>
+          <label for="Black_Boxes-input-type">Select Entry Type:</label>
+          <select id="Black_Boxes-input-type">
+            <option value="Upload">Upload</option>
+            <option value="Manual">Manual</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="index.html">Back to home</a>
+</body>
+
+</html>
