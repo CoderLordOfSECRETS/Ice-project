@@ -1,7 +1,7 @@
 //import {DateTime, Interval, Duration} from 'https://cdn.jsdelivr.net/npm/luxon@3.5.0/+esm'
 const DateTime = luxon.DateTime;
 const Interval = luxon.Interval;
-const Duration = luxon.Duration
+const Duration = luxon.Duration;
 //export default schedule
 //Placeholder data, will reqire a parser
 
