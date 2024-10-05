@@ -28,8 +28,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if (div3) { div3.style.display = 'none'; }
         } else if (dropdown.value === 'Manual') {
             div1.style.display = 'none';
-            div2.style.display = 'none';
-            if (div3) { div3.style.display = 'block'; }
+            if (div3) { 
+                div2.style.display = 'none';
+                div3.style.display = 'block'; 
+            } else {
+                div2.style.display = 'block';
+            }
         }
     }
 
@@ -46,3 +50,28 @@ document.addEventListener('DOMContentLoaded', function () {
     Black_BoxesTypeDropdown.onchange = () => toggleDivs(Black_BoxesTypeDropdown, Black_BoxesUploadDiv, Black_BoxesManualDiv);
     toggleDivs(Black_BoxesTypeDropdown, Black_BoxesUploadDiv, Black_BoxesManualDiv);
 });
+
+function updateTeamDropdowns() {
+    const teamDropdowns = [{obj:document.getElementById("games-input-type-Manual-form-homeTeam"),metcalfe: false}, 
+        {obj:document.getElementById("games-input-type-Manual-form-awayTeam"),metcalfe:false},
+    {obj:document.getElementById("Black_Boxes-input-type-Manual-form-affectedTeam"),metcalfe:true}]
+    teamDropdowns.forEach(dropdown => {
+        dropdown.obj.innerHTML = ""; // Clear existing options
+        if(dropdown.metcalfe) {
+        // Populate dropdown with Metcalfe teams
+        metcalfeTeams.forEach(team => {
+            const option = document.createElement("option");
+            option.value = team.name;
+            option.textContent = team.name;
+            dropdown.obj.appendChild(option);
+        });
+    } else {
+        Teams.forEach(team => {
+            const option = document.createElement("option");
+            option.value = team.name;
+            option.textContent = team.name;
+            dropdown.obj.appendChild(option);
+        });
+    }
+    });
+}

@@ -20,6 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -55,9 +56,20 @@
             <input type="file" id="iceSlotUpload" accept=".csv" />
           </div>
           <div id="slot-input-type-Manual">
-            <form>
-              <h1>test</h1>
-              <!--create form-->
+            <form id="slot-input-type-Manual-form">
+              <label for="slot-input-type-Manual-form-startTime">Start time:</label>
+              <input type="datetime-local" id="slot-input-type-Manual-form-startTime" name="startTime">
+              <br>
+              <label for="slot-input-type-Manual-form-endTime">End time:</label>
+              <input type="datetime-local" id="slot-input-type-Manual-form-endTime" name="endTime">
+              <br>
+              <input type="checkbox" id="slot-input-type-Manual-form-fullIce" name="fullIce">
+              <label for="slot-input-type-Manual-form-fullIce">Full Ice</label>
+              <br>
+              <label for="slot-input-type-Manual-form-arena">Arena:</label>
+              <input type="text" id="slot-input-type-Manual-form-arena" name="arena">
+              <br>
+              <input type="submit" value="Add slot">
             </form>
           </div>
         </div>
@@ -74,10 +86,34 @@
             <input type="file" id="gamesUpload" accept=".csv">
           </div>
           <div id="games-input-type-ttmWebLink">
-            <!--build a ttm weblink form-->
+            <form id="games-input-type-ttmWebLink-form">
+              <input type="radio" name="weblinkType" id="games-input-type-ttmWebLink-form-default">
+              <label for="games-input-type-ttmWebLink-form-default">Use default weblink (D9)</label>
+              <br>
+              <input type="radio" name="weblinkType" id="games-input-type-ttmWebLink-form-custom">
+              <label for="games-input-type-ttmWebLink-form-custom">Select custom weblink</label>
+              <input type="url" name="customUrl">
+              <input type="submit" value="Import TTM data">
+            </form>
           </div>
           <div id="games-input-type-Manual">
-            <!--build a manual form-->
+            <form id="games-input-type-Manual-form">
+              <label for="games-input-type-Manual-form-startTime">Start time:</label>
+              <input type="datetime-local" id="games-input-type-Manual-form-startTime" name="startTime">
+              <label for="games-input-type-Manual-form-endTime">End time:</label>
+              <input type="datetime-local" id="games-input-type-Manual-form-endTime" name="endTime">
+              <label for="games-input-type-Manual-form-homeTeam">Home team:</label>
+              <select id="games-input-type-Manual-form-homeTeam" name="homeTeam">
+                <!--Options generated Dynamically-->
+              </select>
+              <label for="games-input-type-Manual-form-awayTeam">Home team:</label>
+              <select id="games-input-type-Manual-form-awayTeam" name="awayTeam">
+                <!--Options generated Dynamically-->
+              </select>
+              <label for="games-input-type-Manual-form-arena">Arena:</label>
+              <input type="text" id="games-input-type-Manual-form-arena" name="arena">
+              <input type="submit" value="Add slot">
+            </form>
           </div>
         </div>
         <div id="tab3" class="tab-content">
@@ -93,10 +129,21 @@
             <input type="file" id="teamsUpload" accept=".csv">
           </div>
           <div id="teams-input-type-ttmWebLink">
-            <!--build a ttm weblink form-->
+            <form id="teams-input-type-ttmWebLink-form">
+              <input type="radio" name="weblinkType" id="teams-input-type-ttmWebLink-form-default">
+              <label for="teams-input-type-ttmWebLink-form-default">Use default weblink (D9)</label>
+              <br>
+              <input type="radio" name="weblinkType" id="teams-input-type-ttmWebLink-form-custom">
+              <label for="teams-input-type-ttmWebLink-form-custom">Select custom weblink</label>
+              <input type="url" name="customUrl">
+              <input type="submit" value="Import TTM data">
+            </form>
           </div>
           <div id="teams-input-type-Manual">
-            <!--build a manual form-->
+            <form id="teams-input-type-Manual-form">
+              <label for="teams-input-type-Manual-form-name">Name:</label>
+              <input type="text" id="teams-input-type-Manual-form-name" name="name">
+            </form>
           </div>
         </div>
         <div id="tab4" class="tab-content">
@@ -111,7 +158,16 @@
             <input type="file" id="teamsUpload" accept=".csv">
           </div>
           <div id="Black_Boxes-input-type-Manual">
-            <!--Build Manual form-->
+            <form id="Black_Boxes-input-type-Manual-form">
+              <label for="Black_Boxes-input-type-Manual-form-startTime">Start time:</label>
+              <input type="datetime-local" id="Black_Boxes-input-type-Manual-form-startTime" name="startTime">
+              <label for="Black_Boxes-input-type-Manual-form-endTime">End time:</label>
+              <input type="datetime-local" id="Black_Boxes-input-type-Manual-form-endTime" name="endTime">
+              <label for="Black_Boxes-input-type-Manual-form-affectedTeam">Affected Team:</label>
+              <select id="Black_Boxes-input-type-Manual-form-affectedTeam">
+                <!--Options Populated Dynamically-->
+              </select>
+            </form>
           </div>
         </div>
       </div>

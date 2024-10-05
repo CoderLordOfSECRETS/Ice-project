@@ -31,7 +31,11 @@ let iceSlots = [
 let metcalfeGames = [
     { interval: Interval.after(DateTime.local(2024, 10, 3, 5, 15), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", homeTeam: { name: "Metcalfe Jets U15 B1", age: 8, level: "B" }, awayTeam: { name: "Metcalfe Jets U18 B1", age: 10, level: "B" } }];
 let metcalfeTeams = [{ name: "Metcalfe Jets U15 B1", age: 8, level: "B" }, { name: "Metcalfe Jets U18 B1", age: 10, level: "B" }, { name: "Metcalfe Jets U9 A", age: 2, level: "A" }];
-
+//will need to be moved when a parser is created
+let Teams = metcalfeTeams
+document.addEventListener('DOMContentLoaded', function () {
+    updateTeamDropdowns();
+});
 function assignIceValue() {
     iceSlots.forEach(slot => {
         slot.value = slot.interval.length("hours");
@@ -217,7 +221,7 @@ function assignSlots(availiableSlots) {
                 availiableSlots.splice(pos, 1);
             }
         }
-        if(boolBreak) {return;}
+        if (boolBreak) { return; }
         updateSlots(0)
     });
     if (availiableSlots.length > 0) { assignSlots(availiableSlots); }

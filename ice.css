@@ -10,6 +10,12 @@
     font-style: normal;
 }
 
+.dm-sans-pt100 {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
 
 body {
     background-color: var(--cadet-gray);
@@ -40,10 +46,12 @@ p {
     color: white;
     line-height: 1.6;
     margin: 10px 0;
+    font-family: "DM Sans", sans-serif;
 }
 
 label {
     color: white;
+    font-family: "DM Sans", sans-serif;
 }
 
 button {
