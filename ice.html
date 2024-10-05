@@ -5,12 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ice Scheduler</title>
-  <script src="https://cdn.jsdelivr.net/npm/luxon@3.5.0/build/global/luxon.js"></script> <!--Not Minified!-->
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3.5.0/build/global/luxon.min.js"></script> <!--Minified!-->
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/luxon3@6.1.15/index.global.min.js"></script>
   <script src="scripts/scheduler.js"></script>
   <script src="scripts/FullCallendar.js"></script>
   <script src="scripts/tabs.js"></script>
+  <script src="scripts/dropdowns.js"></script>
   <link rel="stylesheet" href="ice.css">
   <link rel="icon" href="Images/calendar.png">
 
@@ -49,6 +50,16 @@
             <option value="Upload">Upload</option>
             <option value="Manual">Manual</option>
           </select>
+          <div id="slot-input-type-Upload">
+            <label for="iceSlotUpload" class="file-label">Select A File (.csv)</label>
+            <input type="file" id="iceSlotUpload" accept=".csv" />
+          </div>
+          <div id="slot-input-type-Manual">
+            <form>
+              <h1>test</h1>
+              <!--create form-->
+            </form>
+          </div>
         </div>
         <div id="tab2" class="tab-content">
           <h2>Input Games</h2>
@@ -58,6 +69,16 @@
             <option value="ttmWebLink">TTM Web Link</option>
             <option value="Manual">Manual</option>
           </select>
+          <div id="games-input-type-Upload">
+            <label for="gamesUpload" class="file-label">Select A File (.csv)</label>
+            <input type="file" id="gamesUpload" accept=".csv">
+          </div>
+          <div id="games-input-type-ttmWebLink">
+            <!--build a ttm weblink form-->
+          </div>
+          <div id="games-input-type-Manual">
+            <!--build a manual form-->
+          </div>
         </div>
         <div id="tab3" class="tab-content">
           <h2>Input Teams</h2>
@@ -67,6 +88,16 @@
             <option value="ttmWebLink">TTM Web Link</option>
             <option value="Manual">Manual</option>
           </select>
+          <div id="teams-input-type-Upload">
+            <label for="teamsUpload" class="file-label">Select A File (.csv)</label>
+            <input type="file" id="teamsUpload" accept=".csv">
+          </div>
+          <div id="teams-input-type-ttmWebLink">
+            <!--build a ttm weblink form-->
+          </div>
+          <div id="teams-input-type-Manual">
+            <!--build a manual form-->
+          </div>
         </div>
         <div id="tab4" class="tab-content">
           <h2>Input Black Boxes</h2>
@@ -75,6 +106,13 @@
             <option value="Upload">Upload</option>
             <option value="Manual">Manual</option>
           </select>
+          <div id="Black_Boxes-input-type-Upload">
+            <label for="teamsUpload" class="file-label">Select A File (.csv)</label>
+            <input type="file" id="teamsUpload" accept=".csv">
+          </div>
+          <div id="Black_Boxes-input-type-Manual">
+            <!--Build Manual form-->
+          </div>
         </div>
       </div>
     </div>
