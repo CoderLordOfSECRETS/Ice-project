@@ -16,7 +16,7 @@ const allowedTimes = [{ weekday: { startTime: "17:00", endTime: "18:00" }, weeke
 { weekday: { startTime: "18:00", endTime: "21:30" }, weekend: { startTime: "8:00", endTime: "21:30" } }, //U16
 { weekday: { startTime: "18:00", endTime: "22:00" }, weekend: { startTime: "15:00", endTime: "22:00" } }] //U18
 
-let iceSlots = [
+const iceSlots = [
     { interval: Interval.after(DateTime.local(2024, 10, 3, 3, 30), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
     { interval: Interval.after(DateTime.local(2024, 10, 5, 3, 30), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: false, teamsassigned: { number: 0 } },
     { interval: Interval.after(DateTime.local(2024, 10, 5, 4, 30), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
@@ -44,8 +44,6 @@ function assignIceValue() {
         }
     });
 }
-assignIceValue();
-//function call will need to be bound
 
 function sortGames() {
     metcalfeGames.forEach(game => {
@@ -169,14 +167,7 @@ function rankslot(slot) {
     });
 }
 
-function resetIceValue() {
-    metcalfeTeams.forEach(team => {
-        team.iceValue = 0;
-    });
-}
-
 function assignSlots(availiableSlots) {
-    resetIceValue()
     availiableSlots.forEach(slot => {
         rankslot(slot);
     });
@@ -218,7 +209,17 @@ function assignSlots(availiableSlots) {
                 }
             } else {
                 team.iceSlots.push(team.favoriteSlots.slots[tries]);
-                availiableSlots.splice(pos, 1);
+                if (!availiableSlots[pos].fullIce || availiableSlots[pos].teamsassigned == 1) {
+                    availiableSlots.splice(pos, 1);
+                }
+                if (availiableSlots[pos].teamsassigned.team1 && availiableSlots[pos].fullIce) {
+                    availiableSlots[pos].teamsassigned.team2 = team;
+                } else {
+                    availiableSlots[pos].teamsassigned.team1 = team;
+                }
+                availiableSlots[pos].teamsassigned.number = availiableSlots[pos].teamsassigned.number + 1;
+
+                boolBreak = true;
             }
         }
         if (boolBreak) { return; }
@@ -229,6 +230,7 @@ function assignSlots(availiableSlots) {
 
 async function schedule() {
     //add checks and data verification
+    assignIceValue();
     assignSlots(iceSlots);
     console.log(metcalfeTeams);
 }
