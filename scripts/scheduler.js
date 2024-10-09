@@ -16,7 +16,7 @@ const allowedTimes = [{ weekday: { startTime: "17:00", endTime: "18:00" }, weeke
 { weekday: { startTime: "18:00", endTime: "21:30" }, weekend: { startTime: "8:00", endTime: "21:30" } }, //U16
 { weekday: { startTime: "18:00", endTime: "22:00" }, weekend: { startTime: "15:00", endTime: "22:00" } }] //U18
 
-const iceSlots = [
+let iceSlots = [
     { interval: Interval.after(DateTime.local(2024, 10, 3, 3, 30), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
     { interval: Interval.after(DateTime.local(2024, 10, 5, 3, 30), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: false, teamsassigned: { number: 0 } },
     { interval: Interval.after(DateTime.local(2024, 10, 5, 4, 30), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
@@ -26,7 +26,17 @@ const iceSlots = [
     { interval: Interval.after(DateTime.local(2024, 10, 3, 3, 30), Duration.fromISO("PT1H")), arena: "Metcalfe", fullIce: true, teamsassigned: { number: 0 } },
     { interval: Interval.after(DateTime.local(2024, 10, 4, 3, 30), Duration.fromISO("PT1H")), arena: "Fred Barrett", fullIce: false, teamsassigned: { number: 0 } },
     { interval: Interval.after(DateTime.local(2024, 10, 6, 3, 30), Duration.fromISO("PT1H")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
-    { interval: Interval.after(DateTime.local(2024, 10, 7, 16, 30), Duration.fromISO("PT1H")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } }];
+    { interval: Interval.after(DateTime.local(2024, 10, 7, 16, 30), Duration.fromISO("PT1H")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
+    { interval: Interval.after(DateTime.local(2024, 10, 4, 17, 0), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
+    { interval: Interval.after(DateTime.local(2024, 10, 5, 7, 0), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
+    { interval: Interval.after(DateTime.local(2024, 10, 5, 17, 0), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
+    { interval: Interval.after(DateTime.local(2024, 10, 6, 7, 0), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
+    { interval: Interval.after(DateTime.local(2024, 10, 7, 18, 0), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
+    { interval: Interval.after(DateTime.local(2024, 10, 8, 18, 0), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
+    { interval: Interval.after(DateTime.local(2024, 10, 9, 17, 0), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
+    { interval: Interval.after(DateTime.local(2024, 10, 10, 17, 0), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
+    { interval: Interval.after(DateTime.local(2024, 10, 11, 7, 0), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } },
+    { interval: Interval.after(DateTime.local(2024, 10, 12, 17, 0), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", fullIce: true, teamsassigned: { number: 0 } }];
 
 let metcalfeGames = [
     { interval: Interval.after(DateTime.local(2024, 10, 3, 5, 15), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", homeTeam: { name: "Metcalfe Jets U15 B1", age: 8, level: "B" }, awayTeam: { name: "Metcalfe Jets U18 B1", age: 10, level: "B" } }];
@@ -39,9 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
 function assignIceValue() {
     iceSlots.forEach(slot => {
         slot.value = slot.interval.length("hours");
-        if (slot.fullIce) {
-            slot.value *= 2;
-        }
     });
 }
 
@@ -139,11 +146,14 @@ function rankslot(slot) {
         }
 
         //return here with more ranking criteria
-        team.assignedGames.forEach(game => {
-            if (game.interval.start.hasSame(slot.interval.start, 'day')) {
-                iceSameDay += 1
-            }
-        });
+        if (team.assignedGames) {
+            team.assignedGames.forEach(game => {
+                if (game.interval.start.hasSame(slot.interval.start, 'day')) {
+                    iceSameDay += 1
+                }
+            });
+        }
+        
         if (team.assignedPractices) {
             team.assignedPractices.forEach(practice => {
                 if (practice.interval.start.hasSame(slot.interval.start, 'day')) {
@@ -151,6 +161,7 @@ function rankslot(slot) {
                 }
             });
         }
+
         if (iceSameDay == 2) {
             slot.rankings.push({ ranking: 15, name: team.name });
             return;
@@ -168,69 +179,88 @@ function rankslot(slot) {
 }
 
 function assignSlots(availiableSlots) {
+    // Check if there are any available slots to process
+    if (availiableSlots.length === 0) return;
+
+    // Rank slots for each available slot
     availiableSlots.forEach(slot => {
         rankslot(slot);
     });
+
     metcalfeTeams.forEach(team => {
         let favoriteSlots = { slots: [], ranking: 0 };
         availiableSlots.forEach(slot => {
-            let ranking = slot.rankings.filter(ranking => ranking.name === team.name)[0].ranking;
+            let ranking = slot.rankings.filter(ranking => ranking.name === team.name)[0]?.ranking || 0;
             if (ranking > favoriteSlots.ranking) {
                 favoriteSlots = { slots: [slot], ranking: ranking };
-            } else if (ranking == favoriteSlots.ranking) {
+            } else if (ranking === favoriteSlots.ranking) {
                 favoriteSlots.slots.push(slot);
             }
         });
-        team.favoriteSlots = favoriteSlots
-        team.iceSlots = []
+        team.favoriteSlots = favoriteSlots;
     });
-    //slot distribution
 
-    metcalfeTeams.sort((a, b) => { //sort by ice value, then favorite slots
-        if (a.iceValue == b.iceValue || !a.iceValue || !b.iceValue) {
-            return a.favoriteSlots.length - b.favoriteSlots.length
+    // Sort teams by ice value, then by number of favorite slots
+    metcalfeTeams.sort((a, b) => {
+        if (a.iceValue === b.iceValue || !a.iceValue || !b.iceValue) {
+            return a.favoriteSlots.slots.length - b.favoriteSlots.slots.length;
         } else {
-            return a.iceValue - b.iceValue
+            return a.iceValue - b.iceValue;
         }
     });
+
     metcalfeTeams.forEach(team => {
-        //rethink loop structure
-        let boolBreak = false
+        let boolBreak = false;
+
         function updateSlots(tries) {
-            const pos = availiableSlots.indexOf(team.favoriteSlots.slots[tries])
-            if (pos < 0) {
-                console.warn("missing slot from availiable slots")
-                if (tries + 1 > team.favoriteSlots.slots.length) {
+            const pos = availiableSlots.indexOf(team.favoriteSlots.slots[tries]);
+            if (pos < 0 || pos > availiableSlots.length || !availiableSlots[pos]) {
+                console.warn("missing slot from available slots");
+                if (tries + 1 >= team.favoriteSlots.slots.length) {
                     console.warn("team", team, "is out of slots with", team.iceSlots.length, "slots");
                     boolBreak = true;
                     return;
                 } else {
-                    updateSlots(tries + 1)
+                    updateSlots(tries + 1);
                 }
             } else {
                 team.iceSlots.push(team.favoriteSlots.slots[tries]);
-                if (!availiableSlots[pos].fullIce || availiableSlots[pos].teamsassigned == 1) {
-                    availiableSlots.splice(pos, 1);
-                }
+                
                 if (availiableSlots[pos].teamsassigned.team1 && availiableSlots[pos].fullIce) {
                     availiableSlots[pos].teamsassigned.team2 = team;
                 } else {
                     availiableSlots[pos].teamsassigned.team1 = team;
                 }
-                availiableSlots[pos].teamsassigned.number = availiableSlots[pos].teamsassigned.number + 1;
+                availiableSlots[pos].teamsassigned.number = (availiableSlots[pos].teamsassigned.number || 0) + 1;
+
+                team.iceValue = availiableSlots[pos].value + (team.iceValue || 0)
+
+                if (!availiableSlots[pos].fullIce || availiableSlots[pos].teamsassigned.number - 1 > 0) { // minus one to account for the one added
+                    availiableSlots.splice(pos, 1);
+                }
 
                 boolBreak = true;
             }
         }
-        if (boolBreak) { return; }
-        updateSlots(0)
+
+        updateSlots(0);
+        if (boolBreak) {
+            return;
+        }
     });
-    if (availiableSlots.length > 0) { assignSlots(availiableSlots); }
+
+    // Call assignSlots only if there are still available slots
+    if (availiableSlots.length > 0) {
+        assignSlots(availiableSlots);
+    }
 }
 
 async function schedule() {
     //add checks and data verification
     assignIceValue();
+    metcalfeTeams.forEach(team => {
+        team.iceSlots = [];
+    });
     assignSlots(iceSlots);
     console.log(metcalfeTeams);
 }
