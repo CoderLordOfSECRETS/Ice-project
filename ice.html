@@ -25,7 +25,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
@@ -57,8 +59,11 @@
             <option value="Manual">Manual</option>
           </select>
           <div id="slot-input-type-Upload">
-            <label for="iceSlotUpload" class="file-label">Select A File (.csv)</label>
-            <input type="file" id="iceSlotUpload" accept=".csv" />
+            <form id="slot-input-type-Upload-form">
+              <label for="iceSlotUpload" class="file-label">Select A File (.csv)</label>
+              <input type="file" id="iceSlotUpload" accept=".csv" name="upload" />
+              <input type="submit" value="Add slot">
+            </form>
           </div>
           <div id="slot-input-type-Manual">
             <form id="slot-input-type-Manual-form">
@@ -87,8 +92,10 @@
             <option value="Manual">Manual</option>
           </select>
           <div id="games-input-type-Upload">
-            <label for="gamesUpload" class="file-label">Select A File (.csv)</label>
-            <input type="file" id="gamesUpload" accept=".csv">
+            <form id="games-input-type-Upload-form">
+              <label for="gamesUpload" class="file-label">Select A File (.csv)</label>
+              <input type="file" id="gamesUpload" accept=".csv" name="upload">
+            </form>
           </div>
           <div id="games-input-type-ttmWebLink">
             <form id="games-input-type-ttmWebLink-form">
@@ -130,8 +137,10 @@
             <option value="Manual">Manual</option>
           </select>
           <div id="teams-input-type-Upload">
-            <label for="teamsUpload" class="file-label">Select A File (.csv)</label>
-            <input type="file" id="teamsUpload" accept=".csv">
+            <form id="teams-input-type-Upload-form">
+              <label for="teamsUpload" class="file-label">Select A File (.csv)</label>
+              <input type="file" id="teamsUpload" accept=".csv" name="upload">
+            </form>
           </div>
           <div id="teams-input-type-ttmWebLink">
             <form id="teams-input-type-ttmWebLink-form">
@@ -159,8 +168,10 @@
             <option value="Manual">Manual</option>
           </select>
           <div id="Black_Boxes-input-type-Upload">
-            <label for="teamsUpload" class="file-label">Select A File (.csv)</label>
-            <input type="file" id="teamsUpload" accept=".csv">
+            <form id="Black_Boxes-input-type-Upload-form">
+              <label for="teamsUpload" class="file-label">Select A File (.csv)</label>
+              <input type="file" id="teamsUpload" accept=".csv" name="upload">
+            </form>
           </div>
           <div id="Black_Boxes-input-type-Manual">
             <form id="Black_Boxes-input-type-Manual-form">

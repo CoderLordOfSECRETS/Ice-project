@@ -42,7 +42,8 @@ let metcalfeGames = [
     { interval: Interval.after(DateTime.local(2024, 10, 3, 5, 15), Duration.fromISO("PT1H30M")), arena: "Fred Barrett", homeTeam: { name: "Metcalfe Jets U15 B1", age: 8, level: "B" }, awayTeam: { name: "Metcalfe Jets U18 B1", age: 10, level: "B" } }];
 let metcalfeTeams = [{ name: "Metcalfe Jets U15 B1", age: 8, level: "B" }, { name: "Metcalfe Jets U18 B1", age: 10, level: "B" }, { name: "Metcalfe Jets U9 A", age: 2, level: "A" }];
 //will need to be moved when a parser is created
-let Teams = metcalfeTeams
+let Teams = metcalfeTeams;
+let Games = metcalfeGames;
 document.addEventListener('DOMContentLoaded', function () {
     updateTeamDropdowns();
 });
@@ -153,7 +154,7 @@ function rankslot(slot) {
                 }
             });
         }
-        
+
         if (team.assignedPractices) {
             team.assignedPractices.forEach(practice => {
                 if (practice.interval.start.hasSame(slot.interval.start, 'day')) {
@@ -225,7 +226,7 @@ function assignSlots(availiableSlots) {
                 }
             } else {
                 team.iceSlots.push(team.favoriteSlots.slots[tries]);
-                
+
                 if (availiableSlots[pos].teamsassigned.team1 && availiableSlots[pos].fullIce) {
                     availiableSlots[pos].teamsassigned.team2 = team;
                 } else {
